@@ -27,12 +27,4 @@ class JoeSandbox:
         if response.status_code != requests.codes.ok:
             return Exception('Unable to fetch data from: {0}'.format(url))
         # --
-        return xmltodict.parse(response.content.decode('utf-8'))
-
-
-if __name__ == '__main__':
-    analysis = JoeSandbox.recent_analysis()
-    print(len(analysis))
-    # data = JoeSandbox.get_analysis(joe_id=42887)
-    # print(data['analysis']['hashes']['sha256'])
-    #
+        return xmltodict.parse(response.content.decode('utf-8'), force_list={'ip', 'domain', 'file', 'signare'})
